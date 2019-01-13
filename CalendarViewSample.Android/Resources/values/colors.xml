@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color
+        name="launcher_background">#FFFFFF</color>
+    <color
+        name="colorPrimary">#3F51B5</color>
+    <color
+        name="colorPrimaryDark">#303F9F</color>
+    <color
+        name="colorAccent">#FF4081</color>
+    <color
+        name="calendar_active_month_bg">#FFF5F7F9</color>
+    <color
+        name="calendar_bg">#FFFFFFFF</color>
+    <color
+        name="calendar_divider">#FFBABABA</color>
+    <color
+        name="calendar_inactive_month_bg">#FFD7D9DB</color>
+    <color
+        name="calendar_selected_day_bg">#FF379BFF</color>
+    <color
+        name="calendar_highlighted_day_bg">#CCFFCC</color>
+    <color
+        name="calendar_selected_range_bg">#FF96CAFF</color>
+    <color
+        name="calendar_text_inactive">#40778088</color>
+    <color
+        name="calendar_text_active">#FF778088</color>
+    <color
+        name="calendar_text_selected">#FFFFFFFF</color>
+    <color
+        name="calendar_text_unselectable">#7F778088</color>
+</resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:const="clr-namespace:CalendarViewSample.Constants"
+    x:Class="CalendarViewSample.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--Global Styles-->
+            <Style
+                TargetType="NavigationPage">
+                <Setter
+                    Property="BarBackgroundColor"
+                    Value="{x:Static const:UIConstants.NAVIGATION_BAR_BACKGROUND_COLOR}" />
+                <Setter
+                    Property="BarTextColor"
+                    Value="{x:Static const:UIConstants.NAVIGATION_BAR_TEXT_COLOR}" />
+            </Style>
+            <Style
+                TargetType="Label">
+                <Setter
+                    Property="FontSize"
+                    Value="14" />
+                <Setter
+                    Property="TextColor"
+                    Value="#7C7C7C" />
+            </Style>
+            <!-- Label Styles -->
+            <Style
+                x:Key="Subtitle"
+                TargetType="Label">
+                <Setter
+                    Property="FontAttributes"
+                    Value="Bold" />
+                <Setter
+                    Property="FontSize"
+                    Value="14" />
+                <Setter
+                    Property="TextColor"
+                    Value="#6C6C6C" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
