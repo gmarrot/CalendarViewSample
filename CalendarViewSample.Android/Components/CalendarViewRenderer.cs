@@ -25,25 +25,22 @@ namespace CalendarViewSample.Droid.Components {
         CalendarArrowView _leftArrow;
         CalendarArrowView _rightArrow;
 
+        bool _disposed;
+
         public CalendarViewRenderer(Context context) : base(context) {
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<CalendarView> e) {
             base.OnElementChanged(e);
 
-            if (e.OldElement == null) {
+            if (Control == null) {
                 var inflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
                 _containerView = inflater.Inflate(Resource.Layout.calendar_picker, null);
 
                 _picker = _containerView.FindViewById<CalendarPickerView>(Resource.Id.calendar_view);
                 _picker.Init(Element.MinDate, Element.MaxDate, Element.HighlightedDaysOfWeek);
-                _picker.OnDateSelected += (object sender, DateSelectedEventArgs evt) => {
-                    ProtectFromEventCycle(() => { Element.NotifyDateSelected(evt.SelectedDate); });
-                };
-                _picker.OnMonthChanged += (object sender, MonthChangedEventArgs mch) => {
-                    SetNavigationArrows();
-                    ProtectFromEventCycle(() => { Element.NotifyDisplayedMonthChanged(mch.DisplayedMonth); });
-                };
+                _picker.OnDateSelected += HandleOnDateSelected;
+                _picker.OnMonthChanged += HandleOnMonthChanged;
                 SetDisplayedMonth(Element.DisplayedMonth);
                 SetNavigationArrows();
                 SetColors();
@@ -60,6 +57,19 @@ namespace CalendarViewSample.Droid.Components {
                     SetDisplayedMonth(Element.DisplayedMonth);
                 }
             });
+        }
+
+        protected override void Dispose(bool disposing) {
+            if (!_disposed) {
+                if (disposing && _picker != null) {
+                    _picker.OnDateSelected -= HandleOnDateSelected;
+                    _picker.OnMonthChanged -= HandleOnMonthChanged;
+                }
+
+                _disposed = true;
+            }
+
+            base.Dispose(disposing);
         }
 
         void ProtectFromEventCycle(Action action) {
@@ -201,6 +211,15 @@ namespace CalendarViewSample.Droid.Components {
             //Divider
             if (Element.DateSeparatorColor != Color.Default)
                 _picker.StyleDescriptor.DateSeparatorColor = Element.DateSeparatorColor.ToAndroid();
+        }
+
+        void HandleOnDateSelected(object sender, DateSelectedEventArgs args) {
+            ProtectFromEventCycle(() => Element.NotifyDateSelected(args.SelectedDate));
+        }
+
+        void HandleOnMonthChanged(object sender, MonthChangedEventArgs mch) {
+            SetNavigationArrows();
+            ProtectFromEventCycle(() => Element.NotifyDisplayedMonthChanged(mch.DisplayedMonth));
         }
 
     }
